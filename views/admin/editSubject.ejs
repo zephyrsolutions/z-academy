@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-ACADEMY</title>
+</head>
+<body>
+    <h1>Edit Subject</h1>
+    <form action="/admin/editSubject/<%= subject._id %>?_method=PUT" method="POST">
+        <input type="hidden" name="courseId" value="<%= subject.course %>">
+        <input type="text" name="semesterId" value="<%= sem %>">
+
+        <label>Course Name : </label>
+        <select name="course">
+            <% course.forEach(c => { %>
+                <option value="<%= c._id %>">
+                    <%= c.courseName %>
+                </option>
+            <% }) %>
+        </select>
+        <label>Subject Name</label>
+        <input type="text" name="subjectName" value="<%= subject.subjectName %>">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

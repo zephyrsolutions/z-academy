@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-ACADEMY</title>
+</head>
+<body>
+    <h1>Add Author</h1>
+    <form action="/library/addAuthor" method="POST">
+        <label>Author Name:</label>
+        <input type="text" name="authorName">
+        <button type="submit">Add</button>
+    </form>
+    <hr>
+    <h1>View Author</h1>
+    <% if(!author){ %>
+        <p>Something went Wrong</p>
+    <% }else{ %>
+        <% authorArr = Object.values(author)  %>
+        <table>
+            <thead>
+                <th>Author Name</th>
+                <th>Creation Date</th>
+                <th>Updation Date</th>
+            </thead>
+            <% authorArr.forEach(a => { %>
+                <tbody>
+                    <tr>
+                        <td><%= a.authorName %></td>
+                        <td><%= a.creationDate %></td>
+                        <td><%= a.updationDate %></td>
+                        <td>
+                            <a href="/library/getAuthor/<%= a._id %>">
+                                <button type="submit">Edit</button>
+                            </a>
+                        </td>
+                        <td>
+                            <button type="submit">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            <% }) %>
+        </table>
+    <% } %>
+</body>
+</html>
