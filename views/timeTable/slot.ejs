@@ -11,6 +11,9 @@
         border-collapse: collapse;
     }
 </style>
+
+<% const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] %>
+
 <body>
     <h1>Add Slot</h1>
     <button id="btn">Add New Slot</button>
@@ -20,8 +23,6 @@
         <input type="text" name="form">
         <label>To</label>
         <input type="text" name="to">
-
-        <% const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] %>
         <% days.forEach(day => { %>
             <input type="checkbox" name="days" value="<%= day %>">
             <%= day %>
@@ -31,39 +32,37 @@
     </form>
     <hr>
     <h1>View Time Slot</h1>
-    <% if(!slot){ %>
+    <% if (!slot) { %>
         <p>Something went wrong</p>
     <% } else { %>
         <% slotArr = Object.values(slot) %>
         <table>
             <thead>
                 <tr>
-                    <th></th> <!-- Empty header cell for spacing -->
+                    <th></th> <!-- Empty cell at the top-left corner -->
                     <% slotArr.forEach(s => { %>
-                        <th>
-                            <%= s.from %> - <%= s.to %>
-                        </th>
+                        <th><%= s.from %> - <%= s.to %></th> <!-- Time slot as column headings -->
                     <% }) %>
                 </tr>
             </thead>
             <tbody>
-                <% const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']; %>
-                <% for (let i = 0; i < 6; i++) { %>
+                <% days.forEach(day => { %>
                     <tr>
-                        <td><%= days[i - 1] %></td>
+                        <td><%= day %></td> <!-- Day name as row heading -->
                         <% slotArr.forEach(s => { %>
-                            <td> <!-- Each day/time slot cell -->
-                                <!-- Your content here -->
-                                <p>
-                                    <%= slot[i] %>
-                                </p>
+                            <td>
+                                <% if (s.days.includes(day)) { %>
+                                    <p>Sub: </p>
+                                    <p>Teacher: </p>
+                                <% } else { %>
+                                    X
+                                <% } %>
                             </td>
                         <% }) %>
                     </tr>
-                <% } %>
+                <% }) %>
             </tbody>
         </table>
-        
     <% } %>
 </body>
     
