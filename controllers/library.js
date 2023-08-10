@@ -1,6 +1,6 @@
 const { render } = require('ejs')
-const cloudinary = require('../utils/cloudinary')
-const upload = require('../utils/multer')
+const { request } = require('express')
+const cloudinary = require('../middleware/cloudinary')
 const Category = require('../models/Category')
 const Author = require('../models/Author')
 const Book = require('../models/Book')
@@ -149,37 +149,27 @@ module.exports = {
     },
     addBook: async (req, res) => {
         try{
-            upload.single('image')(req, res, async (err) => {
-            if(err){
-            console.error(err)
-            res.render('error/500')
-            } else {
-                    try{
-                        // Upload the file to Cloudinary
-                        const result = await cloudinary.uploader.upload(req.file.path);
-                        const imageUrl = result.secure_url;
-                        const regDate = new Date().toISOString().slice(0, 10)
-                        const updationDate = new Date().toISOString().slice(0, 10)
-                        const isIssued = 0
-                        await Book.create({
-                            bookName: req.body.bookName,
-                            category: req.body.category,
-                            author: req.body.author,
-                            ISBNNumber: req.body.ISBNNumber,
-                            bookPrice: req.body.bookPrice,
-                            bookImage: imageUrl,
-                            isIssued: isIssued,
-                            regDate: regDate,
-                            updationDate: updationDate,
-                        })
-                        console.log('Book has been added')
-                        res.redirect('/library/book')
-                    }catch(err){
-                        console.error(err)
-                        res.redirect('error/500')
-                    }
-                }
+            // Upload the file to Cloudinary
+            const result = await cloudinary.uploader.upload(req.file.path);
+            const imageUrl = result.secure_url;
+            const cloudinary_id = result.public_id;
+            const regDate = new Date().toISOString().slice(0, 10)
+            const updationDate = new Date().toISOString().slice(0, 10)
+            const isIssued = 0
+            await Book.create({
+                bookName: req.body.bookName,
+                category: req.body.category,
+                author: req.body.author,
+                ISBNNumber: req.body.ISBNNumber,
+                bookPrice: req.body.bookPrice,
+                bookImage: imageUrl,
+                isIssued: isIssued,
+                regDate: regDate,
+                updationDate: updationDate,
+                cloudinary_id,
             })
+            console.log('Book has been added')
+            res.redirect('/library/book')
         }catch(err){
             console.error(err)
             res.redirect('error/500')

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-ACADEMY</title>
+</head>
+<style>
+    th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+<body>
+    <h1>Add Slot</h1>
+    <button id="btn">Add New Slot</button>
+    <br>
+    <form id="form" style="display: none;" action="/timetable/addSlot" method="POST">
+        <label>From</label>
+        <input type="text" name="form">
+        <label>To</label>
+        <input type="text" name="to">
+
+        <% const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] %>
+        <% days.forEach(day => { %>
+            <input type="checkbox" name="days" value="<%= day %>">
+            <%= day %>
+        <% }) %>
+        
+        <button type="submit">Submit</button>
+    </form>
+    <hr>
+    <h1>View Time Slot</h1>
+    <% if(!slot){ %>
+        <p>Something went wrong</p>
+    <% } else { %>
+        <% slotArr = Object.values(slot) %>
+        <table>
+            <thead>
+                <tr>
+                    <th></th> <!-- Empty header cell for spacing -->
+                    <% slotArr.forEach(s => { %>
+                        <th>
+                            <%= s.from %> - <%= s.to %>
+                        </th>
+                    <% }) %>
+                </tr>
+            </thead>
+            <tbody>
+                <% const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']; %>
+                <% for (let i = 0; i < 6; i++) { %>
+                    <tr>
+                        <td><%= days[i - 1] %></td>
+                        <% slotArr.forEach(s => { %>
+                            <td> <!-- Each day/time slot cell -->
+                                <!-- Your content here -->
+                                <p>
+                                    <%= slot[i] %>
+                                </p>
+                            </td>
+                        <% }) %>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+        
+    <% } %>
+</body>
+    
+<script>
+    const btn = document.getElementById('btn');
+    btn.addEventListener('click', () => {
+        const form = document.getElementById('form')
+
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    })
+</script>
+</html>

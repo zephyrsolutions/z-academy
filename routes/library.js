@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const upload = require('../middleware/multer')
 const libraryController = require('../controllers/library')
 
 router.get('/', libraryController.getIndex)
@@ -19,7 +20,7 @@ router.put('/editAuthor/:id', libraryController.editAuthor)
 
 // Book Routes
 router.get('/book', libraryController.getBook)
-router.post('/addBook', libraryController.addBook)
+router.post('/addBook', upload.single('image'), libraryController.addBook)
 router.get('/getBook/:id', libraryController.getBookById)
 router.put('/editBook/:id', libraryController.editBook)
 

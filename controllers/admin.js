@@ -1,6 +1,6 @@
 const { request } = require('express')
 const { render } = require('ejs')
-const cloudinary = require('../middleware/cloudinary')
+const cloudinary = require('../middleware/cloudinary') 
 const Department = require('../models/Department')
 const Course = require('../models/Course')
 const Section = require('../models/Section')
