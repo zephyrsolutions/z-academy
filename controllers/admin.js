@@ -8,6 +8,7 @@ const Subject = require('../models/Subject')
 const Teacher = require('../models/Teacher')
 const Student = require('../models/Student')
 const Syllabus = require('../models/Syllabus')
+const Slot = require('../models/Slot')
 
 module.exports = {
     getIndex: (req, res) => {
@@ -504,12 +505,11 @@ module.exports = {
     getCourseMainById: async (req, res) => {
         try{
             const course = await Course.findById(req.params.id)
-
-            const subject = await Subject.find()
-                res.render('admin/courseMain',{
-                    course,
-                    subject,
-                })
+            const slot = await Slot.find()
+            res.render('admin/courseMain',{
+                course,
+                slot,
+            })
 
         }catch(err){
             console.error(err)
@@ -523,11 +523,11 @@ module.exports = {
             const course = await Course.findById(req.params.id )
             const subject = await Subject.find({course:req.params.id, semester: req.params.sem})
             const sem = req.params.sem
-                res.render('admin/semesterMain',{
-                    subject,
-                    course,
-                    sem,
-                })
+            res.render('admin/semesterMain',{
+                subject,
+                course,
+                sem,
+            })
         }catch(err){
             console.error(err)
             res.render('error/500') 
@@ -568,5 +568,13 @@ module.exports = {
             console.error(err)
             res.redirect('error/500')
         }
+    },
+
+    addRoutine: async (req, res) => {
+        try{
+            console.log(req.params)
+        } catch (err){
+            console.error(err)
+        }        
     },
 }

@@ -61,4 +61,6 @@ router.get('/semesterMain/:id/:sem', adminController.getSemesterMainById)
 router.get('/syllabus', adminController.getSyllabus) 
 router.post('/addSyllabus', upload.single('image'), adminController.addSyllabus)
 
+router.get('/addRoutine/:id/:day', adminController.addRoutine)
+
 module.exports = router
