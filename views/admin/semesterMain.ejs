@@ -158,14 +158,15 @@
                                     <% }) %> -->
                                     
                                     <% const rData = routine.filter(r => r.timeSlot === s.timeSlot && r.days === day) %>
-                                    <%= rData %>
-                                    <!-- Button trigger modal -->
-                                    
-
-                                    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1"
-                                        data-timeslot="<%= s.timeSlot %>" data-day="<%= day %>">
-                                        Add
-                                    </button> -->
+                                    <% if(rData.length){ %>
+                                        <%= rData %>
+                                    <% } else { %>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+                                            data-timeslot="<%= s.timeSlot %>" data-day="<%= day %>">
+                                            Add
+                                        </button>   
+                                    <% } %>
                                     
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModal1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
