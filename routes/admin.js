@@ -56,11 +56,13 @@ router.get('/courseMain/:id', adminController.getCourseMainById)
 
 // Route To Fetch Specific Semester Details By ID Under courseMain
 router.get('/semesterMain/:id/:sem', adminController.getSemesterMainById)
+router.post('/addSlot', adminController.addSlot)// Add Slot Route
 
 //Syllabus Route
 router.get('/syllabus', adminController.getSyllabus) 
 router.post('/addSyllabus', upload.single('image'), adminController.addSyllabus)
 
-router.get('/addRoutine/:id/:day', adminController.addRoutine)
+// Routine Route
+router.post('/routine', adminController.routine)
 
 module.exports = router

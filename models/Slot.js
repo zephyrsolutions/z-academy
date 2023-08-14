@@ -1,16 +1,20 @@
 const mongoose = require('mongoose')
 
 const SlotSchema = new mongoose.Schema({
-    from: {
-        type: String,
-        required: true,
-    },
-    to: {
+    timeSlot: {
         type: String,
         required: true,
     },
     days: {
         type: Array,
+        required: true,
+    },
+    course: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Course',
+    },
+    semester: {
+        type: String,
         required: true,
     }
 })

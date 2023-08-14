@@ -8,6 +8,7 @@ const Subject = require('../models/Subject')
 const Teacher = require('../models/Teacher')
 const Student = require('../models/Student')
 const Syllabus = require('../models/Syllabus')
+const Routine = require('../models/Routine')
 const Slot = require('../models/Slot')
 
 module.exports = {
@@ -505,10 +506,8 @@ module.exports = {
     getCourseMainById: async (req, res) => {
         try{
             const course = await Course.findById(req.params.id)
-            const slot = await Slot.find()
             res.render('admin/courseMain',{
                 course,
-                slot,
             })
 
         }catch(err){
@@ -520,18 +519,67 @@ module.exports = {
     // Controller To Fetch Specific Semester Details By ID Under Course 
     getSemesterMainById: async (req, res) => {
         try{
-            const course = await Course.findById(req.params.id )
-            const subject = await Subject.find({course:req.params.id, semester: req.params.sem})
+            const course = await Course.findById(req.params.id).populate('department')
+            const routine = await Routine.find({course: req. params.id, semester: req.params.sem})
+            const departmentIdOfCourseObj = course.department.id
+            const teacher = await Teacher.find({ department: departmentIdOfCourseObj })
+
+            // const course = await Course.findById(req.params.id)
+            const subject = await Subject.find({course: req. params.id, semester: req.params.sem})
             const sem = req.params.sem
+            const slot = await Slot.find({course: req.params.id, semester: req.params.sem})
             res.render('admin/semesterMain',{
                 subject,
                 course,
                 sem,
+                slot,
+                teacher,
+                routine,
             })
         }catch(err){
             console.error(err)
             res.render('error/500') 
         }
+    },
+
+    // Add Slot Controller
+    addSlot: async (req, res) => {
+        try{
+            const courseId = req.body.courseId
+            const semesterId= req.body.semesterId
+            await Slot.create({
+                timeSlot: req.body.timeSlot,
+                days: req.body.days,
+                course: courseId,
+                semester: semesterId,
+            })
+            console.log('Slot has been added')
+            res.redirect(`/admin/semesterMain/${courseId}/${semesterId}`)
+        }catch(err){
+            console.error(err)
+            res.redirect('error/500')
+        }
+    },
+
+    // Add Routine
+    routine: async (req, res) => {
+        try{
+            const courseId = req.body.courseId
+            const semesterId= req.body.semesterId
+            await Routine.create({
+                timeSlot: req.body.timeSlot,
+                days: req.body.days,
+                subject: req.body.subject,
+                teacher: req.body.teacher,
+                course: courseId,
+                semester: semesterId,
+            })
+            res.redirect(`/admin/semesterMain/${courseId}/${semesterId}`)
+            console.log('routine has been added')
+        } catch (err){
+            console.error(err)
+            res.redirect('error/500')
+        }        
     },
 
     //Syllabus Controller
@@ -568,13 +616,5 @@ module.exports = {
             console.error(err)
             res.redirect('error/500')
         }
-    },
-
-    addRoutine: async (req, res) => {
-        try{
-            console.log(req.params)
-        } catch (err){
-            console.error(err)
-        }        
     },
 }
