@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-ACADEMY</title>
+</head>
+<body>
+    <h1>Teacher</h1>
+    <h2>Add Teacher</h2>
+    <form action="/admin/addTeacher" method="POST">
+        <p>
+            <label> Teacher Name: </label>
+            <input type="text" name="teacherName" value="">
+        </p>
+        <p>
+            <label> Teacher Email: </label>
+            <input type="mail" name="teacherEmail" value="">
+        </p>
+        <p>
+            <label> Teacher Phone No: </label>
+            <input type="text" name="teacherPhoneNo" value="">
+        </p>
+        <p>
+            <label> Teacher Address: </label>
+            <input type="text" name="teacherAddress" value="">
+        </p>
+        <p>
+            <label> Teacher Designation: </label>
+            <input type="text" name="teacherDesignation" value="">
+        </p>
+        <p>
+            <label> Date of Joining: </label>
+            <input type="date"  name="dateofJoining" value="">
+        </p>
+        <p>
+            <label> Teacher DOB: </label>
+            <input type="date" name="teacherDOB" value="">
+        </p>
+        <p>
+            <label> Teacher Image: </label>
+            <input type="file" name="image" value="">
+        </p>
+        <p>
+            <label> Teacher Gender: </label>
+            <input type="radio" name="teacherGender" value="Male" checked>Male
+            <input type="radio" name="teacherGender" value="Female">Female
+            <input type="radio" name="teacherGender" value="Others">Others
+        </p>
+        <p>
+            <label> Subject: </label>
+            <select name="subjects">
+                <option> Select Subject </option>
+                <% subjects.forEach(s => { %>
+                    <option value="<%= s._id %>">
+                        <%= s.subjectName %>
+                    </option>
+                <% }) %>
+            </select>
+        </p>
+        <p>
+            <button type="submit">Submit</button>
+        </p>
+    </form>
+    <hr>
+    <h1>View all teacher..</h1>
+    <% if(!teacher){ %>
+        <p> Something Went Wrong </p>
+    <% }else{ %>
+        <% let teacherArr = Object.values(teacher) %>
+        <table>
+            <thead>
+                <tr>
+                    <th> Teacher Name </th>
+                    <th> Teacher Email </th>
+                    <th> Teacher Phone No </th>
+                    <th> Teacher Address </th>
+                    <th> Teacher Designation </th>
+                    <th> Date of Joining </th>
+                    <th> Teacher DOB </th>
+                    <th> Teacher Image </th>
+                    <th> Teacher Gender </th>
+                    <th> Subject </th>
+                </tr>
+             </thead>
+             <% teacherArr.forEach(t => { %>
+                <tbody>
+                    <tr>
+                        <td><%= t.teacherName %></td>
+                        <td><%= t.teacherEmail %></td>
+                        <td><%= t.teacherPhoneNo %></td>
+                        <td><%= t.teacherAddress %></td>
+                        <td><%= t.teacherDesignation %></td>
+                        <td><%= t.dateofJoining %></td>
+                        <td><%= t.teacherDOB %></td>
+                        <td>
+                            <img src="<%= t.teacherImage %>" height="50" width="100">
+                        </td>
+                        <td><%= t.teacherGender %></td>
+                        <td><%= t.subjects.subjectName %></td>
+                        <td>
+                            <a href="/admin/getTeacher/<%= t._id %>">
+                                <button type="submit">Edit</button>
+                            </a>
+                        </td>
+                        <td>
+                            <form action="/admin/deleteTeacher/<%= t._id %>" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+             <% }) %>
+        </table>
+    <% } %> 
+</body>
+</html>

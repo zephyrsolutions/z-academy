@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-ACADEMY</title>
+</head>
+<body>
+    <form action="/library/editCategory/<%= category._id %>?_method=PUT" method="POST">
+        <p>
+            <label>Category Name:</label>
+            <input type="text" name="categoryName" value="<%= category.categoryName %>">
+
+            <button type="submit">Submit</button>
+        </p>
+    </form>
+</body>
+</html>

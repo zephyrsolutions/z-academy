@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-ACADEMY</title>
+</head>
+<body>
+    <h1>Section</h1>
+    <h2>Add Section</h2>
+    <form action="/admin/addSection" method="POST">
+        <label>Course Name : </label>
+        <input type="text" name="courseName" value="">
+        <label>Semester/Year Name: </label>
+        <input type="text" name="semesterName" value="">
+        <lable>Section Name: </lable>
+        <input type="text" name="sectionName" value="">
+        <label>Total Student: </label>
+        <input type="text" name="totalStudent" value="">
+        <button type="submit">Submit</button>
+    </form>
+    <hr>
+    <h1>View all section..</h1>
+    <% if(!section) { %>
+        <p> Something went wrong</p>
+    <% }else %>
+    <% let sectionArr = Object.values(section) %>
+        <table>
+            <thead>
+                <th> Course Name </th>
+                <th> Semester/Year Name </th>
+                <th> Section Name </th>
+                <th> Total Student </th>
+            </thead>
+            <% sectionArr.forEach( s => { %>
+            <tbody>
+                <tr>
+                    <td>
+                        <%= s.courseName %>
+                    </td>
+                    <td>
+                        <%= s.semesterName %>
+                    </td>
+                    <td>
+                        <%= s.sectionName %>
+                    </td>
+                    <td>
+                        <%= s.totalStudent %>
+                    </td>
+                    <td>
+                        <a href="/admin/getSection/<%= s._id %>">
+                            <button type="submit"> Edit </button>
+                        </a>
+                    </td>
+                    <td>
+                        <form action="/admin/deleteSection/<%= s._id %>" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit"> Delete </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+            <% }) %>
+        </table>
+</body>
+</html>

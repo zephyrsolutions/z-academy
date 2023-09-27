@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-ACCADEMY</title>
+</head>
+<body>
+    <h1>Issue A New Book</h1>
+    <form action="/library/addIssuedBook" method="POST">
+        <label>Student Name</label>
+        <select name="student">
+            <% student.forEach(s => { %>
+                <option value="<%= s._id %>"><%= s.studentName %></option>
+            <% }) %>
+        </select>
+        <label>Book Name</label>
+        <select name="book">
+            <% book.forEach(b => { %>
+                <option value="<%= b._id %>"><%= b.bookName %></option>
+            <% }) %>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+    <hr>
+    <h1>View Issued Book</h1>
+    <% if(!issuedBook){ %>
+        <p>Something went wrong</p>
+    <% }else{ %>
+        <% issuedBookArr = Object.values(issuedBook) %>
+        <table>
+            <thead>
+                <th>Student Name</th>
+                <th>Book Name</th>
+                <th>Issues Date</th>
+                <th>Return Date</th>
+                <th>Return Status</th>
+                <th>Fine</th>
+            </thead>
+            <tbody>
+                <% issuedBookArr.forEach(i => { %>
+                    <tr>
+                        <td><%= i.student.studentName %></td>
+                        <td><%= i.book.bookName %></td>
+                        <td><%= i.issuesDate %></td>
+                        <td><%= i.returnDate %></td>
+                        <td><%= i.returnStatus %></td>
+                        <td><%= i.fine %></td>
+                        <td>
+                            <a href="/library/getIssuedBook/<%= i._id %>">
+                                <button type="submit">Edit</button>
+                            </a>
+                        </td>
+                        <td>
+                            <button type="submit">Delete</button>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+</body>
+</html>

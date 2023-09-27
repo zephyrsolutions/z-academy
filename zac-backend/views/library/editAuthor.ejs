@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-ACADEMY</title>
+</head>
+<body>
+    <h1>Edit Author</h1>
+    <form action="/library/editAuthor/<%= author._id %>?_method=PUT" method="POST">
+        <label>Author Name:</label>
+        <input type="text" name="authorName" value="<%= author.authorName %>">
+        <label>Creation Date</label>
+        <input type="date" name="creationDate" value="<%= author.creationDate %>">
+        <label>Updation Date</label>
+        <input type="date" name="updationDate" value="<%= author.updationDate %>">
+        <button type="submit">Add</button>
+    </form>
+</body>
+</html>
