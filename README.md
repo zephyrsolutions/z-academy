@@ -1,2 +1,0 @@
-# z-academy
-A modern, fast, and responsive application suite designed specifically for educational institutions such as schools, colleges, universities, and coaching institutes. This comprehensive solution caters to the diverse needs of managing student records, attendance, grades, communication, and more. Built using the powerful MERN Stack (MongoDB, Express, React, Node.js), the application ensures scalability, flexibility, and robustness in meeting the evolving demands of educational environments.
