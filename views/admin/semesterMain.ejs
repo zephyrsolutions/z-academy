@@ -156,10 +156,24 @@
                                             </button>
                                         <% } %>
                                     <% }) %> -->
-                                    
+            
                                     <% const rData = routine.filter(r => r.timeSlot === s.timeSlot && r.days === day) %>
                                     <% if(rData.length){ %>
-                                        <%= rData %>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Teacher</th>
+                                                    <th>Subject</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% rData.forEach(r => { %>
+                                                <td><%= r.teacher.teacherName %></td>
+                                                <td><%= r.subject.subjectName %></td>
+                                                <% }) %>
+                                            </tbody>
+                                        </table>
+                                        <!-- <%= rData %> -->
                                     <% } else { %>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1"

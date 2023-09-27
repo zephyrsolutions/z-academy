@@ -521,6 +521,8 @@ module.exports = {
         try{
             const course = await Course.findById(req.params.id).populate('department')
             const routine = await Routine.find({course: req. params.id, semester: req.params.sem})
+                .populate('subject')
+                .populate('teacher')
             const departmentIdOfCourseObj = course.department.id
             const teacher = await Teacher.find({ department: departmentIdOfCourseObj })
 
