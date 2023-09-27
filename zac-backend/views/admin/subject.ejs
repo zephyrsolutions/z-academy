@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-ACADEMY</title>
+</head>
+<body>
+    <h1>Subject</h1>
+    <h2>Add Subject</h2>
+    <form action="/admin/addSubject" method="POST">
+        <label>Course Name : </label>
+        <select name="course">
+            <option> Select Course </option>
+            <% course.forEach(c => { %>
+                <option value="<%= c._id %>">
+                    <%= c.courseName %>
+                </option>
+            <% }) %>
+        </select>
+        <label>Subject Name</label>
+        <input type="text" name="subjectName" value="">
+        <button type="submit">Submit</button>
+    </form>
+    <hr>
+    <h1>View all subject..</h1>
+    <% if(!subject){ %>
+       <p> Something went wrong </p>
+    <% }else { %>
+        <% let subjectArr = Object.values(subject) %>
+        <table>
+            <thead>
+                <tr>
+                    <th> Course Name </th>
+                    <th> Subject Name </th>
+                </tr>
+            </thead>
+            <% subjectArr.forEach(sub => { %>
+                <tbody>
+                    <tr>
+                        <td><%= sub.course.courseName %></td>
+                        <td><%= sub.subjectName %></td>
+                        <td>
+                            <a href="/admin/getSubject/<%= sub._id %>">
+                               <button type="submit"> Edit </button> 
+                            </a>
+                        </td>
+                        <td>
+                            <form action="/admin/deleteSubject/<%= sub._id %>" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit"> Delete </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            <% }) %>
+        </table>
+    <% } %>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-ACCADEMY</title>
+</head>
+<body>
+    <h1>ADD Books</h1>
+    <form action="/library/addBook" method="POST" enctype="multipart/form-data">
+        <label>Book Name</label>
+        <input type="text" name="bookName">
+        <label>Category</label>
+        <select name="category">
+            <% category.forEach(c => { %>
+                <option value="<%= c._id %>"><%= c.categoryName %></option>
+            <% }) %>
+        </select>
+        <label>Author</label>
+        <select name="author">
+            <% author.forEach(a => { %>
+                <option value="<%= a._id %>"><%= a.authorName %></option>
+            <% }) %>
+        </select>
+        <label>ISBN Number</label>
+        <input type="text" name="ISBNNumber">
+        <label>Price</label>
+        <input type="text" name="bookPrice">
+        <label>Book Picture</label>
+        <input type="file" name="image"> 
+        <button type="submit">Submit</button>
+    </form>
+    <hr>
+    <h1>View All Book</h1>
+    <% if(!book){ %>
+        <p>Something Went Wrong</p>
+    <% }else{ %>
+        <% let bookArr = Object.values(book) %>
+        <table>
+            <thead>
+                <th>Book Name</th>
+                <th>Category</th>
+                <th>Author</th>
+                <th>ISBN Number</th>
+                <th>Price</th>
+                <th>Book Issued</th>
+                <th>Registration Date</th>
+                <th>Updation Date</th>
+                <th>Book Picture</th>
+            </thead>
+            <tbody>
+                <% bookArr.forEach(b => { %>
+                    <tr>
+                        <td><%= b.bookName %></td>
+                        <td><%= b.category.categoryName %></td>
+                        <td><%= b.author.authorName %></td>
+                        <td><%= b.ISBNNumber %></td>
+                        <td><%= b.bookPrice %></td>
+                        <td><%= b.isIssued %></td>
+                        <td><%= b.regDate %></td>
+                        <td><%= b.updationDate %></td>
+                        <td><img src="<%= b.bookImage %>" height="50" width="100"></td>
+                        <td>
+                            <a href="/library/getBook/<%= b._id %>">
+                                <button type="submit">Edit</button>
+                            </a>
+                        </td>
+                        <td>
+                            <button type="submit">Delete</button>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+</body>
+</html>

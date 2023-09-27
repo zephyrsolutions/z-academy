@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-ACADEMY</title>
+</head>
+<body>
+    <form action="/admin/editStudent/<%= student._id %>" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        <p>
+            <label> Student Name: </label>
+            <input type="text" name="studentName" value="<%= student.studentName %>">
+        </p>
+        <p>
+            <label> Student Email: </label>
+            <input type="mail" name="studentEmail" value="<%= student.studentEmail %>">
+        </p>
+        <p>
+            <label> Student Phone No: </label>
+            <input type="text" name="studentPhoneNo" value="<%= student.studentPhoneNo %>">
+        </p>
+        <p>
+            <label> Student Address: </label>
+            <input type="text" name="studentAddress" value="<%= student.studentAddress %>">
+        </p>
+        <p>
+            <label> Student Image: </label>
+        </p>
+        <p>
+            <label> Student DOB: </label>
+            <!-- <input type="date" name="studentDOB" value="<%= student.studentDOB %>"> -->
+        </p>
+        <p>
+        <label> Student Gender: </label>
+            <input type="text" name="studentGender" value="<%= student.studentGender %>">
+        </p>
+        <p>
+            <label> Course Name: </label>
+            <select name="course">
+                <% course.forEach(c => { %>
+                    <option value="<%= c._id %>">
+                        <%= c.courseName %>
+                    </option>
+                <% }) %>
+            </select>
+        </p>
+        <p>
+            <button type="submit">Submit</button>
+        </p>
+    </form>
+</body>
+</html>
