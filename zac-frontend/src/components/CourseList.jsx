@@ -1,6 +1,6 @@
 // DepartmentList.js
 import React from 'react';
-import { useAppContext } from './context/AppState';
+import { useAppContext } from '../context/AppProvider';
 
 function CourseList() {
   const { courses } = useAppContext();

@@ -1,7 +1,7 @@
 import './App.css'
-import { AppProvider } from './context/AppState';
-import DepartmentList from './DepartmentList';
-import CourseList from './CourseList';
+import { AppProvider } from './context/AppProvider';
+import DepartmentList from './components/DepartmentList';
+import CourseList from './components/CourseList';
 
 function App() {  
 

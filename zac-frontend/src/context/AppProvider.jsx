@@ -1,8 +1,7 @@
 // AppState.js
+import AppContext from './AppContext';
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios'; // Import Axios here
-
-const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [departments, setDepartments] = useState([]); // Initialize departments state
@@ -48,3 +47,4 @@ export const AppProvider = ({ children }) => {
 export const useAppContext = () => {
   return useContext(AppContext);
 };
+
