@@ -23,9 +23,10 @@ module.exports = {
     getDepartment: async (req, res) => {
         try{
             const department = await Department.find()
-            res.render('admin/department', {
-              department,
-            })
+            // res.render('admin/department', {
+            //   department,
+            // })
+            res.json(department)
           }catch(err){
               console.error(err)
               res.render('error/500')
@@ -91,10 +92,11 @@ module.exports = {
             const course = await Course.find()
                 .populate('department')
 
-            res.render('admin/departmentMain',{
-                course, 
-                department,
-            })
+            // res.render('admin/departmentMain',{
+            //     course, 
+            //     department,
+            // })
+            res.json(course)
         }catch(err){
             console.error(err)
             res.render('error/500')
