@@ -1,6 +1,8 @@
 // DepartmentList.js
 import React from 'react';
 import { useAppContext } from '../context/AppProvider';
+import { Link } from 'react-router-dom'
+
 
 function DepartmentList() {
   const { departments } = useAppContext();
@@ -8,11 +10,14 @@ function DepartmentList() {
   return (
     <div>
       <h2>Departments</h2>
-      <ul>
+      
         {departments.map((department) => (
-          <li key={department._id}>{department.departmentName}</li>
+        <div>
+          <Link key={department._id} to={`/course/${department._id}`}>{department.departmentName}</Link>
+        </div>
+      
         ))}
-      </ul>
+      
     </div>
   );
 }

@@ -1,23 +1,30 @@
+import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import { AppProvider } from './context/AppProvider';
 import DepartmentList from './components/DepartmentList';
 import CourseList from './components/CourseList';
+import SubjectsList from './components/SubjectsList';
+import TeacherList from './components/TeacherList';
+import StudentList from './components/StudentList';
+import SyllabusList from './components/SyllabusList';
 
 function App() {  
-
   return (
-    <>
-      <AppProvider>
-        {/* <div className="w-[15%] h-20 border-4 border-blue-400 rounded-md flex flex-col justify-center items-center">
-          <p className="contentClass"> School Website </p>
-          <p className="priceClass"> Rs.5999/- only </p>
-        </div> */}
-        <DepartmentList />
-        <CourseList />
-      </AppProvider>      
-    </>
+    <AppProvider>
+      <Routes>
+        {/* Define your routes here */}
+        <Route path="/department" element={<DepartmentList />} />
+        <Route path="/course/:departmentID" element={<CourseList />} />
+        <Route path="/subject" element={<SubjectsList />} />
+        <Route path="/teacher" element={<TeacherList />} />
+        <Route path="/student" element={<StudentList />} />
+        <Route path="/syllabus" element={<SyllabusList />} />
+        {/* Add more routes as needed */}
+      </Routes>
+
+      
+    </AppProvider>
   )
 }
 
 export default App
-

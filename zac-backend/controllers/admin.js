@@ -26,7 +26,7 @@ module.exports = {
             // res.render('admin/department', {
             //   department,
             // })
-            res.json(department)
+            return res.json(department)
           }catch(err){
               console.error(err)
               res.render('error/500')
@@ -92,6 +92,7 @@ module.exports = {
             const course = await Course.find()
                 .populate('department')
 
+            return res.json(course)
             // res.render('admin/departmentMain',{
             //     course, 
             //     department,
@@ -236,10 +237,11 @@ module.exports = {
             const course = await Course.find()
             const subject = await Subject.find()
                 .populate('course')
-            res.render('admin/semesterMain',{
-                subject,
-                course,
-            })   
+            // res.render('admin/semesterMain',{
+            //     subject,
+            //     course,
+            // })   
+            return res.json(subject)
         }catch(err){
             console.error(err)
             res.render('error/500')
@@ -314,9 +316,10 @@ module.exports = {
     getTeacher: async (req, res) => {
         try{
             const teacher = await Teacher.find()
-                res.render('admin/departmentMain',{
-                teacher,
-            })
+            //     res.render('admin/departmentMain',{
+            //     teacher,
+            // })
+            return res.json(teacher)
         }catch(err){
             console.error(err)
             res.render('error/500')
@@ -404,10 +407,11 @@ module.exports = {
             const course = await Course.find()
             const student = await Student.find()
                 .populate('course')
-            res.render('admin/student',{
-                student,
-                course,
-            })
+            // res.render('admin/student',{
+            //     student,
+            //     course,
+            // })
+            return res.json(student)
         }catch(err){
             console.error(err)
             res.render('error/500')
@@ -592,10 +596,11 @@ module.exports = {
             const course = await Course.find()
             const syllabus = await Syllabus.find()
                 .populate('course')
-            res.render('admin/syllabus', {
-                syllabus,
-                course,
-            })
+            // res.render('admin/syllabus', {
+            //     syllabus,
+            //     course,
+            // })
+            return res.json(syllabus)
         }catch(err){
             console.error(err)
             res.redirect('error/500')
