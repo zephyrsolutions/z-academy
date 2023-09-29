@@ -4,7 +4,7 @@ module.exports = {
     registerAdmin : async(req, res) => {
         await userRegister(req.body, "admin", res)
     },
-    loginAdmin : async(req, res) => {
+    loginAdmin : async(req, res) => {        
         await userLogin(req.body, "admin", res)
     }
 }

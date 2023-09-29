@@ -52,6 +52,7 @@ const userRegister = async(userDetails, role, res) => {
 }
 
 const userLogin = async(userCreds, role, res) => {
+    console.log(userCreds)
     let { username, password } = userCreds
     // First check if the username is in the database
     const user = await User.findOne({ username })
