@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const { userRegister, userLogin, userAuth } = require('../utils/Auth')
+const { userRegister, userLogin, userAuth, checkRole, serializeUser } = require('../utils/Auth')
 const adminController = require('../controllers/Auth/admin')
 const teacherController = require('../controllers/Auth/teacher')
 const studentController = require('../controllers/Auth/student')
@@ -25,18 +25,27 @@ router.post('/login-student', studentController.loginStudent)
 
 // Profile route
 router.get('/profile', userAuth, async(req, res) => {
-    return res.json("Hello")
+    return res.json(serializeUser(req.user))
 })
 
-/* To be completed later.. */
+// Admin PROTECTED route
+router.get('/admin-protected', userAuth, checkRole(['admin']), async(req, res) => {
+    return res.json("Hello Admin")
+})
 
-// Admin protected route
-// router.post('/admin-protected', async(req, res) => {})
+// Teacher PROTECTED route
+router.get('/teacher-protected', userAuth, checkRole(['teacher']), async(req, res) => {
+    return res.json("Hello Teacher")
+})
 
-// Agent protected route
-// router.post('/agent-protected', async(req, res) => {})
+// Student PROTECTED route
+router.get('/student-protected', userAuth, checkRole(['student']), async(req, res) => {
+    return res.json("Hello Student")
+})
 
-// Buyer protected route
-// router.post('/buyer-protected', async(req, res) => {})
+// Student and Teacher PROTECTED route
+router.get('/student-teacher-protected', userAuth, checkRole(['student', 'teacher']), async(req, res) => {
+    return res.json("Hello Student | Teacher")
+})
 
 module.exports = router

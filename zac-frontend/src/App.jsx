@@ -9,6 +9,7 @@ import StudentList from './components/StudentList';
 import SyllabusList from './components/SyllabusList';
 import Home from './pages/Home';
 import AdminLogin from './pages/Admin/AdminLogin';
+import AdminDashboard from './pages/Admin/AdminDashboard';
 
 function App() {  
   return (
@@ -27,6 +28,7 @@ function App() {
 
         {/* Admin routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
 
       

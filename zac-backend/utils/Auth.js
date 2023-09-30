@@ -52,6 +52,7 @@ const userRegister = async(userDetails, role, res) => {
 }
 
 const userLogin = async(userCreds, role, res) => {
+    console.log(userCreds)
     let { username, password } = userCreds
     // First check if the username is in the database
     const user = await User.findOne({ username })
@@ -114,11 +115,35 @@ const validateEmail = async(email) => {
     return user ? false : true
 }
 
+// Check Role Middleware
+const checkRole = roles => (req, res, next) => {
+    if(roles.includes(req.user.role)) {
+        return next()
+    }
+    return res.status(401).json({
+        message: "Unauthorized",
+        success: false
+    })
+}
+
 // Passport middleware
 const userAuth = passport.authenticate("jwt", { session: false })
 
+const serializeUser = user => {
+    return {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        username: user.username,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+    }
+}
+
 module.exports = {
     userAuth,
+    checkRole,
     userLogin,
-    userRegister
+    userRegister,
+    serializeUser
 }
