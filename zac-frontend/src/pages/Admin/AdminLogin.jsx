@@ -30,6 +30,10 @@ const AdminLogin = () => {
       .post('http://localhost:5000/api/users/login-admin', formData)
       .then((response) => {
         if (response && response.data) {
+
+          // Store the token in localStorage
+          localStorage.setItem('jwtToken', response.data.token);
+
           toast('Admin logged in successfully!', {
             position: toast.POSITION.TOP_CENTER,
           });  
@@ -74,8 +78,7 @@ const AdminLogin = () => {
           });
         }
       });
-  };
-  
+  };  
 
   return (
     <>

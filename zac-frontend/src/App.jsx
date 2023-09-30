@@ -13,7 +13,9 @@ import AdminDashboard from './pages/Admin/AdminDashboard';
 
 function App() {  
   return (
+
     <AppProvider>
+
       <Routes>
         {/* Define your routes here */}
         <Route path="/" element={<Home />} />
@@ -25,12 +27,11 @@ function App() {
         <Route path="/syllabus" element={<SyllabusList />} />
         {/* Add more routes as needed */}
 
-
         {/* Admin routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        
       </Routes>
-
       
     </AppProvider>
   )
