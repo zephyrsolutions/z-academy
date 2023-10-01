@@ -4,14 +4,16 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-const AdminLogin = () => {
+const AdminTeacherMgt = () => {
 
     const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState ({
+        name: "",
+        email: "",
         username: "",
         password: "",
-        role: "admin",        
+        role: "teacher",        
       });
 
     const handleChange = (event) => {
@@ -27,7 +29,7 @@ const AdminLogin = () => {
       event.preventDefault();
   
       axios
-      .post('http://localhost:5000/api/users/login-admin', formData)
+      .post('http://localhost:5000/api/users/register-teacher', formData)
       .then((response) => {
         if (response && response.data) {
 
@@ -45,15 +47,19 @@ const AdminLogin = () => {
 
             // Clear form inputs on successful submission
             setFormData({
-              username: '',
-              password: '',
+                name: '',
+                email: '',
+                username: '',
+                password: '',
             });
         }, 2000); // 2000 milliseconds (2 second)
   
           // Clear form inputs on successful submission
           setFormData({
-            username: '',
-            password: '',
+                name: '',
+                email: '',
+                username: '',
+                password: '',
           });
         } else {
           // Handle unexpected response format
@@ -82,9 +88,32 @@ const AdminLogin = () => {
 
   return (
     <>
+        <div>AdminTeacherMgt</div>
         <form onSubmit={handleSubmit}>
             <div className="form-group">
-                <label htmlFor="postTitle">Username:</label>
+                <label htmlFor="name">Teacher Name:</label>
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder='Teacher name' 
+                    onChange={handleChange}                   
+                    name="name"
+                    value={formData.name}
+                />
+            </div>
+            <div className="form-group">
+                <label htmlFor="email">Email:</label>
+                <input
+                    type="email"
+                    className="form-control"
+                    placeholder='Email' 
+                    onChange={handleChange}                   
+                    name="email"
+                    value={formData.email}
+                />
+            </div>
+            <div className="form-group">
+                <label htmlFor="username">Username:</label>
                 <input
                     type="text"
                     className="form-control"
@@ -95,7 +124,7 @@ const AdminLogin = () => {
                 />
             </div>
             <div className="form-group">
-                <label htmlFor="postTitle">Password:</label>
+                <label htmlFor="password">Password:</label>
                 <input
                     type="password"
                     className="form-control"
@@ -109,9 +138,8 @@ const AdminLogin = () => {
                 Submit
             </button>
         </form>
-        <ToastContainer />
-    </>
+    </>    
   )
 }
 
-export default AdminLogin
+export default AdminTeacherMgt

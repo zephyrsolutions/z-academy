@@ -5,7 +5,7 @@ const User = require("../models/User")
 
 require('dotenv').config({ path: '../config/.env' })
 
-// Desc : To register the user (ADMIN, SUPERADMIN, USER)
+// Desc : To register the user (ADMIN, TEACHER, STUDENT)
 
 const userRegister = async(userDetails, role, res) => {
     try{
