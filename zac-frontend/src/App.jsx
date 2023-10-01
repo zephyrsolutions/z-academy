@@ -10,6 +10,8 @@ import SyllabusList from './components/SyllabusList';
 import Home from './pages/Home';
 import AdminLogin from './pages/Admin/AdminLogin';
 import AdminDashboard from './pages/Admin/AdminDashboard';
+import AdminTeacherMgt from './pages/Admin/AdminTeacherMgt';
+import AdminStudentMgt from './pages/Admin/AdminStudentMgt';
 
 function App() {  
   return (
@@ -30,6 +32,12 @@ function App() {
         {/* Admin routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+
+        <Route path="/admin/teacher-mgt" element={<AdminTeacherMgt />} />
+        <Route path="/admin/student-mgt" element={<AdminStudentMgt />} />
+
+        
         
       </Routes>
       
