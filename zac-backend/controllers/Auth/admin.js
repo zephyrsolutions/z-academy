@@ -6,5 +6,5 @@ module.exports = {
     },
     loginAdmin : async(req, res) => {        
         await userLogin(req.body, "admin", res)
-    }
+    },    
 }

@@ -29,8 +29,11 @@ router.get('/profile', userAuth, async(req, res) => {
 })
 
 // Admin PROTECTED route
-router.get('/admin-protected', userAuth, checkRole(['admin']), async(req, res) => {
-    return res.json("Hello Admin")
+router.get('/admin-protected', userAuth, checkRole(['admin']), (req, res) => {
+    return res.status(200).send({
+        success: true,
+        user: req.user
+    })
 })
 
 // Teacher PROTECTED route
