@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const AdminLogin = () => {
+const TeacherLogin = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -24,7 +24,7 @@ const AdminLogin = () => {
     event.preventDefault();
 
     axios
-      .post('http://localhost:5000/api/users/login-admin', formData)
+      .post('http://localhost:5000/api/users/login-teacher', formData)
       .then((response) => {
         if (response && response.data) {
           // Store the token in localStorage
@@ -32,7 +32,7 @@ const AdminLogin = () => {
 
           // Make an HTTP GET request to the protected server-side route
           axios
-            .get('http://localhost:5000/api/users/admin-protected', {
+            .get('http://localhost:5000/api/users/teacher-protected', {
               headers: {
                 Authorization: `${localStorage.getItem('jwtToken')}`, // Include the JWT token from localStorage
               },
@@ -41,8 +41,8 @@ const AdminLogin = () => {
               // Check if the response indicates success (e.g., res.status === 200)
               if (res.status === 200) {
                 // Navigate to the server-side route if successful
-                navigate('/admin-protected');
-                toast('Admin logged in successfully!', {
+                navigate('/teacher-protected');
+                toast('Teacher logged in successfully!', {
                   position: toast.POSITION.TOP_CENTER,
                 });
               } else {
@@ -117,4 +117,4 @@ const AdminLogin = () => {
   );
 };
 
-export default AdminLogin;
+export default TeacherLogin;

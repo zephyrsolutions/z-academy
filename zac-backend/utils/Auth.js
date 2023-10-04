@@ -116,7 +116,7 @@ const validateEmail = async(email) => {
 }
 
 // Check Role Middleware
-const checkRole = roles => (req, res, next) => {
+const checkRole = roles => (req, res, next) => {    
     if(roles.includes(req.user.role)) {
         return next()
     }

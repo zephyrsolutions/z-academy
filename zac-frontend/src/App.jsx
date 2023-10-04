@@ -1,5 +1,5 @@
-import { Routes, Route } from 'react-router-dom'
-import './App.css'
+import { Routes, Route, Navigate } from 'react-router-dom';
+import './App.css';
 import { AppProvider } from './context/AppProvider';
 import DepartmentList from './components/DepartmentList';
 import CourseList from './components/CourseList';
@@ -12,14 +12,16 @@ import AdminLogin from './pages/Admin/AdminLogin';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import AdminTeacherMgt from './pages/Admin/AdminTeacherMgt';
 import AdminStudentMgt from './pages/Admin/AdminStudentMgt';
+import TeacherLogin from './pages/Teacher/TeacherLogin';
+import TeacherDashboard from './pages/Teacher/TeacherDashboard';
+import { useState, useEffect } from 'react';
+import ProtectedRoute from './components/ProtectedRoute';
 
-function App() {  
+function App() {
+  
   return (
-
-    <AppProvider>
-
+    <>
       <Routes>
-        {/* Define your routes here */}
         <Route path="/" element={<Home />} />
         <Route path="/department" element={<DepartmentList />} />
         <Route path="/course/:departmentID" element={<CourseList />} />
@@ -27,22 +29,28 @@ function App() {
         <Route path="/teacher" element={<TeacherList />} />
         <Route path="/student" element={<StudentList />} />
         <Route path="/syllabus" element={<SyllabusList />} />
-        {/* Add more routes as needed */}
 
         {/* Admin routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
 
+        {/* <Route element={<ProtectedRoute />}>
+          <Route path="/admin-protected" element={<AdminDashboard />} />
+        </Route> */}
+
+        <Route element={<ProtectedRoute roles={['admin']} />}>
+          <Route path="/admin-protected" element={<AdminDashboard />} />
+        </Route>
+      
         <Route path="/admin/teacher-mgt" element={<AdminTeacherMgt />} />
         <Route path="/admin/student-mgt" element={<AdminStudentMgt />} />
 
-        
+        {/* Teacher routes */}
+        <Route path="/teacher/login" element={<TeacherLogin />} />
+        <Route path="/teacher-protected" element={<TeacherDashboard />} />
         
       </Routes>
-      
-    </AppProvider>
-  )
+    </>
+  );
 }
 
-export default App
+export default App;

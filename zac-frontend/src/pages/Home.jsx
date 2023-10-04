@@ -5,6 +5,7 @@ const Home = () => {
   return (
     <>
         <Link to='/admin/login'>Admin Login</Link>        
+        <Link to='/teacher/login'>Teacher Login</Link> 
     </>
   )
 }
