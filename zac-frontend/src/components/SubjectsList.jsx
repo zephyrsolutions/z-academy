@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppContext } from '../context/AppProvider';
+import { useAppContext } from '../context/App/AppProvider';
 
 function SubjectsList() {
     const { subjects } = useAppContext();
