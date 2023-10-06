@@ -1,6 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import { AppProvider } from './context/App/AppProvider';
 import DepartmentList from './components/DepartmentList';
 import CourseList from './components/CourseList';
 import SubjectsList from './components/SubjectsList';
