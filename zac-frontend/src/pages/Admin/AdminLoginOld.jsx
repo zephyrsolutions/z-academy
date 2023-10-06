@@ -3,15 +3,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useAuthContext } from '../../context/Auth/AuthProvider';
 
-const TeacherLogin = () => {
+const AdminLogin = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    role: 'teacher',
+    role: 'admin',
   });
 
   const handleChange = (event) => {
@@ -21,31 +20,29 @@ const TeacherLogin = () => {
     }));
   };
 
-  const { login } = useAuthContext(); // Get the login function from the auth context
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
     axios
-      .post('http://localhost:5000/api/users/login-teacher', formData)
+      .post('http://localhost:5000/api/users/login-admin', formData)
       .then((response) => {
         if (response && response.data) {
-          // Call the login function to set user data and token         
-          
-          login(response.data.token);
+          // Store the token in localStorage
+          localStorage.setItem('jwtToken', response.data.token);
 
+          // Make an HTTP GET request to the protected server-side route
           axios
-            .get('http://localhost:5000/api/users/teacher-protected', {
+            .get('http://localhost:5000/api/users/admin-protected', {
               headers: {
-                Authorization: response.data.token, // Include the token from the auth context
+                Authorization: `${localStorage.getItem('jwtToken')}`, // Include the JWT token from localStorage
               },
             })
             .then((res) => {
               // Check if the response indicates success (e.g., res.status === 200)
               if (res.status === 200) {
                 // Navigate to the server-side route if successful
-                navigate('/teacher-protected');
-                toast('Teacher logged in successfully!', {
+                navigate('/admin-protected');
+                toast('Admin logged in successfully!', {
                   position: toast.POSITION.TOP_CENTER,
                 });
               } else {
@@ -87,7 +84,7 @@ const TeacherLogin = () => {
         }
       });
   };
-      
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -120,4 +117,4 @@ const TeacherLogin = () => {
   );
 };
 
-export default TeacherLogin;
+export default AdminLogin;

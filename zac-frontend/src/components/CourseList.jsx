@@ -1,6 +1,6 @@
 // DepartmentList.js
 import React from 'react';
-import { useAppContext } from '../context/AppProvider';
+import { useAppContext } from '../context/App/AppProvider';
 import { Link, useParams } from 'react-router-dom'
 
 function CourseList() {

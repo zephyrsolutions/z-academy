@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import { AppProvider } from './context/AppProvider';
+import { AppProvider } from './context/App/AppProvider';
 import DepartmentList from './components/DepartmentList';
 import CourseList from './components/CourseList';
 import SubjectsList from './components/SubjectsList';
@@ -14,6 +14,8 @@ import AdminTeacherMgt from './pages/Admin/AdminTeacherMgt';
 import AdminStudentMgt from './pages/Admin/AdminStudentMgt';
 import TeacherLogin from './pages/Teacher/TeacherLogin';
 import TeacherDashboard from './pages/Teacher/TeacherDashboard';
+import StudentLogin from './pages/Student/StudentLogin';
+import StudentDashboard from './pages/Student/StudentDashboard';
 import { useState, useEffect } from 'react';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -31,22 +33,31 @@ function App() {
         <Route path="/syllabus" element={<SyllabusList />} />
 
         {/* Admin routes */}
-        <Route path="/admin/login" element={<AdminLogin />} />
 
-        {/* <Route element={<ProtectedRoute />}>
-          <Route path="/admin-protected" element={<AdminDashboard />} />
-        </Route> */}
+        <Route path="/admin/login" element={<AdminLogin />} />
 
         <Route element={<ProtectedRoute roles={['admin']} />}>
           <Route path="/admin-protected" element={<AdminDashboard />} />
+          <Route path="/admin/teacher-mgt" element={<AdminTeacherMgt />} />
+          <Route path="/admin/student-mgt" element={<AdminStudentMgt />} />
         </Route>
-      
-        <Route path="/admin/teacher-mgt" element={<AdminTeacherMgt />} />
-        <Route path="/admin/student-mgt" element={<AdminStudentMgt />} />
 
         {/* Teacher routes */}
+
         <Route path="/teacher/login" element={<TeacherLogin />} />
-        <Route path="/teacher-protected" element={<TeacherDashboard />} />
+
+        <Route element={<ProtectedRoute roles={['teacher']} />}>
+          
+          <Route path="/teacher-protected" element={<TeacherDashboard />} />
+        </Route>
+
+        {/* Student routes */}
+
+        <Route path="/student/login" element={<StudentLogin />} />
+
+        <Route element={<ProtectedRoute roles={['student']} />}>          
+          <Route path="/student-protected" element={<StudentDashboard />} />
+        </Route>
         
       </Routes>
     </>

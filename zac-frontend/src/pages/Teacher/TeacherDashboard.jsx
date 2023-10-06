@@ -5,8 +5,7 @@ import Logout from '../../components/Logout'
 const TeacherDashboard = () => {
   return (
     <>
-      <div>Welcome to TeacherDashboard</div>
-      
+      <div>Welcome to TeacherDashboard</div>      
       <Logout />
     </>    
   )

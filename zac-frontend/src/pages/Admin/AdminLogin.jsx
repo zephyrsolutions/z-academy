@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useAuthContext } from '../../context/Auth/AuthProvider';
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -20,6 +21,8 @@ const AdminLogin = () => {
     }));
   };
 
+  const { login } = useAuthContext(); // Get the login function from the auth context
+  
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -27,14 +30,14 @@ const AdminLogin = () => {
       .post('http://localhost:5000/api/users/login-admin', formData)
       .then((response) => {
         if (response && response.data) {
-          // Store the token in localStorage
-          localStorage.setItem('jwtToken', response.data.token);
+          // Call the login function to set user data and token
+          
+          login(response.data.token);
 
-          // Make an HTTP GET request to the protected server-side route
           axios
             .get('http://localhost:5000/api/users/admin-protected', {
               headers: {
-                Authorization: `${localStorage.getItem('jwtToken')}`, // Include the JWT token from localStorage
+                Authorization: response.data.token, // Include the token from the auth context
               },
             })
             .then((res) => {
@@ -84,7 +87,7 @@ const AdminLogin = () => {
         }
       });
   };
-
+      
   return (
     <>
       <form onSubmit={handleSubmit}>
