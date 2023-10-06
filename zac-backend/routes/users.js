@@ -37,13 +37,19 @@ router.get('/admin-protected', userAuth, checkRole(['admin']), (req, res) => {
 })
 
 // Teacher PROTECTED route
-router.get('/teacher-protected', userAuth, checkRole(['teacher']), async(req, res) => {
-    return res.json("Hello Teacher")
+router.get('/teacher-protected', userAuth, checkRole(['teacher']), (req, res) => {
+    return res.status(200).send({
+        success: true,
+        user: req.user
+    })
 })
 
 // Student PROTECTED route
-router.get('/student-protected', userAuth, checkRole(['student']), async(req, res) => {
-    return res.json("Hello Student")
+router.get('/student-protected', userAuth, checkRole(['student']), (req, res) => {
+    return res.status(200).send({
+        success: true,
+        user: req.user
+    })
 })
 
 // Student and Teacher PROTECTED route

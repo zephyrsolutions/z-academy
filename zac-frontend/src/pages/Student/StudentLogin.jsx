@@ -5,13 +5,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuthContext } from '../../context/Auth/AuthProvider';
 
-const TeacherLogin = () => {
+const StudentLogin = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    role: 'teacher',
+    role: 'student',
   });
 
   const handleChange = (event) => {
@@ -27,7 +27,7 @@ const TeacherLogin = () => {
     event.preventDefault();
 
     axios
-      .post('http://localhost:5000/api/users/login-teacher', formData)
+      .post('http://localhost:5000/api/users/login-student', formData)
       .then((response) => {
         if (response && response.data) {
           // Call the login function to set user data and token         
@@ -35,7 +35,7 @@ const TeacherLogin = () => {
           login(response.data.token);
 
           axios
-            .get('http://localhost:5000/api/users/teacher-protected', {
+            .get('http://localhost:5000/api/users/student-protected', {
               headers: {
                 Authorization: response.data.token, // Include the token from the auth context
               },
@@ -44,8 +44,8 @@ const TeacherLogin = () => {
               // Check if the response indicates success (e.g., res.status === 200)
               if (res.status === 200) {
                 // Navigate to the server-side route if successful
-                navigate('/teacher-protected');
-                toast('Teacher logged in successfully!', {
+                navigate('/student-protected');
+                toast('Student logged in successfully!', {
                   position: toast.POSITION.TOP_CENTER,
                 });
               } else {
@@ -120,4 +120,4 @@ const TeacherLogin = () => {
   );
 };
 
-export default TeacherLogin;
+export default StudentLogin;
