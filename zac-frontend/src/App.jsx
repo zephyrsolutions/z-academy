@@ -16,7 +16,7 @@ import StudentLogin from './pages/Student/StudentLogin';
 import StudentDashboard from './pages/Student/StudentDashboard';
 import { useState, useEffect } from 'react';
 import ProtectedRoute from './components/ProtectedRoute';
-import Department from './pages/Admin/Department';
+import AdminDepartment from './pages/Admin/AdminDepartment';
 
 function App() {
   
@@ -24,7 +24,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/department" element={<Department />} />
+        
         <Route path="/course/:departmentID" element={<CourseList />} />
         <Route path="/subject" element={<SubjectsList />} />
         <Route path="/teacher" element={<TeacherList />} />
@@ -37,6 +37,7 @@ function App() {
 
         <Route element={<ProtectedRoute roles={['admin']} />}>
           <Route path="/admin-protected" element={<AdminDashboard />} />
+          <Route path="/admin/department" element={<AdminDepartment />} />
           <Route path="/admin/teacher-mgt" element={<AdminTeacherMgt />} />
           <Route path="/admin/student-mgt" element={<AdminStudentMgt />} />
         </Route>

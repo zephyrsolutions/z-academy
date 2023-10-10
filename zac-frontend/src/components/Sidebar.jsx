@@ -23,7 +23,7 @@ function Sidebar() {
 
   const Menus = [
     { title: "Dashboard", to: "/admin-protected" }, // Add the 'to' prop for links
-    { title: "Department", icon: <AiOutlineFileText />, to: "/department" }, // Add 'to' prop for links
+    { title: "Department", icon: <AiOutlineFileText />, to: "/admin/department" }, // Add 'to' prop for links
     { title: "Media", spacing: true, icon: <BsFillImageFill />, to: "#" },
     {
       title: "Projects",
