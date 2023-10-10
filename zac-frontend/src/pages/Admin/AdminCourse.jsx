@@ -3,7 +3,7 @@ import Sidebar from '../../components/Sidebar'
 import ContentArea from '../../components/ContentArea'
 import Navigation from '../../components/Navigation'
 import FloatingSidebar from '../../components/FloatingSidebar'
-import DepartmentList from '../../components/DepartmentList'
+import CourseList from '../../components/CourseList'
 
 const AdminDepartment = () => {
   return (
@@ -11,7 +11,7 @@ const AdminDepartment = () => {
       <div className="flex">   
         <Navigation /> 
         <Sidebar />
-        <DepartmentList />
+        <CourseList />        
         <FloatingSidebar />
       </div>
     </>

@@ -4,6 +4,7 @@ import { MdOutlineNotificationAdd, MdLogout } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import Logout from './Logout';
 import { Link } from 'react-router-dom';
+import { FiLogOut } from 'react-icons/fi';
 
 
 const Navigation = () => {
@@ -43,9 +44,16 @@ const Navigation = () => {
                 </li>
             ))}
 
-            <li className="md:ml-8 md:my-0 my-7 font-semibold text-gray-800 hover:text-blue-400 duration-500">
+            {/* <li className="md:ml-8 md:my-0 my-7 font-semibold text-gray-800 hover:text-blue-400 duration-500">
                 <span className="md:hidden">LOGOUT</span>
                 <span className="hidden md:inline"><Logout /></span>
+            </li> */}
+
+            <li className="md:ml-8 md:my-0 my-7 font-semibold">
+                <a href="/logout" className="text-gray-800 hover:text-blue-400 duration-500">
+                    <span className="md:hidden">LOGOUT</span>       
+                    <span className="hidden md:inline"><FiLogOut /></span>             
+                </a>
             </li>
 
             </ul>

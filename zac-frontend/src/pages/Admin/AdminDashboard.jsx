@@ -7,6 +7,7 @@ import Navigation from '../../components/Navigation'
 import FloatingSidebar from '../../components/FloatingSidebar'
 
 const AdminDashboard = () => {
+
   return (
     <>
       <div className="flex">   
