@@ -17,6 +17,8 @@ import StudentDashboard from './pages/Student/StudentDashboard';
 import { useState, useEffect } from 'react';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminDepartment from './pages/Admin/AdminDepartment';
+import AdminCourse from './pages/Admin/AdminCourse';
+import Logout from './components/Logout';
 
 function App() {
   
@@ -31,6 +33,9 @@ function App() {
         <Route path="/student" element={<StudentList />} />
         <Route path="/syllabus" element={<SyllabusList />} />
 
+        {/* Logout */}
+        <Route path="/logout" element={<Logout />} />
+
         {/* Admin routes */}
 
         <Route path="/admin/login" element={<AdminLogin />} />
@@ -38,6 +43,7 @@ function App() {
         <Route element={<ProtectedRoute roles={['admin']} />}>
           <Route path="/admin-protected" element={<AdminDashboard />} />
           <Route path="/admin/department" element={<AdminDepartment />} />
+          <Route path="/admin/course" element={<AdminCourse />} />
           <Route path="/admin/teacher-mgt" element={<AdminTeacherMgt />} />
           <Route path="/admin/student-mgt" element={<AdminStudentMgt />} />
         </Route>

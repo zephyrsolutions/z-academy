@@ -3,7 +3,7 @@ import AppContext from './AppContext';
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios'; // Import Axios here
 
-export const AppProvider = ({ children }) => {
+export const AppProvider = ({ children }) => {  
   const [departments, setDepartments] = useState([]); // Initialize departments state
   const [courses, setCourses] = useState([]); // Initialize courses state
   const [subjects, setSubjects] = useState([]); // Initialize subjects state

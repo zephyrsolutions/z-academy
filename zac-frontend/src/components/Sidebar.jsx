@@ -16,6 +16,8 @@ import {
   AiOutlineLogout,
 } from "react-icons/ai";
 import { RiDashboardFill } from "react-icons/ri";
+import Logout from "./Logout";
+
 
 function Sidebar() {
   const [open, setOpen] = useState(false);
@@ -24,7 +26,7 @@ function Sidebar() {
   const Menus = [
     { title: "Dashboard", to: "/admin-protected" }, // Add the 'to' prop for links
     { title: "Department", icon: <AiOutlineFileText />, to: "/admin/department" }, // Add 'to' prop for links
-    { title: "Media", spacing: true, icon: <BsFillImageFill />, to: "#" },
+    { title: "Course", spacing: true, icon: <BsFillImageFill />, to: "/admin/course" },
     {
       title: "Projects",
       icon: <BsReverseLayoutTextSidebarReverse />,
@@ -39,7 +41,7 @@ function Sidebar() {
     { title: "Inbox", icon: <AiOutlineMail /> },
     { title: "Profile", spacing: true, icon: <BsPerson /> },
     { title: "Settings", icon: <AiOutlineSetting /> },
-    { title: "Logout", icon: <AiOutlineLogout /> },
+    { title: "Logout", icon: <AiOutlineLogout />, to: "/logout" },
   ];
 
   const toggleSubmenu = (index) => {
@@ -123,7 +125,7 @@ function Sidebar() {
                     )}
                   </span>
                 </Link>
-              ) : (
+                              ) : (
                 // Otherwise, render a regular list item
                 <li
                   className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white rounded-md ${
@@ -152,8 +154,8 @@ function Sidebar() {
                       />
                     )}
                   </span>
-                </li>
-              )}
+                </li>                
+              )}              
               {menu.submenu && submenuOpen && open && (
                 <ul>
                 {menu.submenuItems.map((submenuItem, index) => (
@@ -169,11 +171,12 @@ function Sidebar() {
                       </span>
                     </Link>
                   </li>
-                ))}
+                ))}               
               </ul>
               )}
             </React.Fragment>
-          ))}
+          ))}           
+               
         </ul>
       </div>
     </>
