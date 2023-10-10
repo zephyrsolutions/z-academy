@@ -1,14 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Logout from '../../components/Logout'
+import Sidebar from '../../components/Sidebar'
+import ContentArea from '../../components/ContentArea'
+import Navigation from '../../components/Navigation'
+import FloatingSidebar from '../../components/FloatingSidebar'
 
 const AdminDashboard = () => {
   return (
     <>
-      <div>Welcome to AdminDashboard</div>
-      <Link to='/admin/teacher-mgt'>Teacher Registration</Link>
-      <Link to='/admin/student-mgt'>Student Registration</Link>
-      <Logout />
+      <div className="flex">   
+        <Navigation /> 
+        <Sidebar />
+        <ContentArea />  
+        <FloatingSidebar />
+      </div>
     </>    
   )
 }

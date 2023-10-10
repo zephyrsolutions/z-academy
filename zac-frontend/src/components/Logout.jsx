@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios'; // You might need to install axios if not already done
 import { useNavigate } from 'react-router-dom';
+import { MdLogout } from "react-icons/md";
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Logout = () => {
   };
 
   return (
-    <button onClick={handleLogout}>Logout</button>
+    <button onClick={handleLogout}><MdLogout className="h-6 w-6"/></button>
   );
 };
 

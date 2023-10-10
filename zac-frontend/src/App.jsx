@@ -1,6 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import DepartmentList from './components/DepartmentList';
 import CourseList from './components/CourseList';
 import SubjectsList from './components/SubjectsList';
 import TeacherList from './components/TeacherList';
@@ -17,6 +16,7 @@ import StudentLogin from './pages/Student/StudentLogin';
 import StudentDashboard from './pages/Student/StudentDashboard';
 import { useState, useEffect } from 'react';
 import ProtectedRoute from './components/ProtectedRoute';
+import Department from './pages/Admin/Department';
 
 function App() {
   
@@ -24,7 +24,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/department" element={<DepartmentList />} />
+        <Route path="/department" element={<Department />} />
         <Route path="/course/:departmentID" element={<CourseList />} />
         <Route path="/subject" element={<SubjectsList />} />
         <Route path="/teacher" element={<TeacherList />} />
