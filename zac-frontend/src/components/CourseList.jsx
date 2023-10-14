@@ -9,14 +9,19 @@ function CourseList() {
   const { departmentID } = useParams()
 
   return (
-    <div>
-      <h2>Courses</h2>
-        {courses.map((course) => (
-          <div>
-            <Link key={course._id}>{course.courseName}</Link>
-          </div>
-        ))}
+
+    <div className="pt-16 pl-10">
+        <h1 className="text-2xl font-semibold">Welcome Admin</h1>
+        <h2>Courses</h2>  
+        <div className="mt-6 ml-2">
+          {courses.map((course) => (
+            <div>
+              <Link key={course._id}>{course.courseName}</Link>
+            </div>        
+          ))}  
+        </div>
     </div>
+    
   );
 }
 

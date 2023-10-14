@@ -1,23 +1,21 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import Logout from '../../components/Logout'
 import Sidebar from '../../components/Sidebar'
 import ContentArea from '../../components/ContentArea'
 import Navigation from '../../components/Navigation'
 import FloatingSidebar from '../../components/FloatingSidebar'
+import CourseList from '../../components/CourseList'
 
-const AdminDashboard = () => {
-
+const AdminDepartment = () => {
   return (
     <>
       <div className="flex">   
         <Navigation /> 
         <Sidebar />
-        <ContentArea />  
+        <CourseList />        
         <FloatingSidebar />
       </div>
-    </>    
+    </>
   )
 }
 
-export default AdminDashboard
+export default AdminDepartment
