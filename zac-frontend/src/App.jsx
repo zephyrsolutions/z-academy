@@ -1,6 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import CourseList from './components/CourseList';
 import SubjectsList from './components/SubjectsList';
 import TeacherList from './components/TeacherList';
 import StudentList from './components/StudentList';
@@ -19,6 +18,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import AdminDepartment from './pages/Admin/AdminDepartment';
 import AdminCourse from './pages/Admin/AdminCourse';
 import Logout from './components/Logout';
+import AdminCourseByDeptId from './pages/Admin/AdminCourseByDeptId';
 
 function App() {
   
@@ -27,7 +27,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         
-        <Route path="/course/:departmentID" element={<CourseList />} />
         <Route path="/subject" element={<SubjectsList />} />
         <Route path="/teacher" element={<TeacherList />} />
         <Route path="/student" element={<StudentList />} />
@@ -43,6 +42,9 @@ function App() {
         <Route element={<ProtectedRoute roles={['admin']} />}>
           <Route path="/admin-protected" element={<AdminDashboard />} />
           <Route path="/admin/department" element={<AdminDepartment />} />
+
+          <Route path="/course/:departmentID" element={<AdminCourseByDeptId />} />
+
           <Route path="/admin/course" element={<AdminCourse />} />
           <Route path="/admin/teacher-mgt" element={<AdminTeacherMgt />} />
           <Route path="/admin/student-mgt" element={<AdminStudentMgt />} />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { NavLink } from "react-router-dom"; // Import NavLink from react-router-dom
 import {
   BsArrowLeftShort,
   BsChevronDown,
@@ -20,13 +20,16 @@ import Logout from "./Logout";
 
 
 function Sidebar() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [submenuOpen, setSubmenuOpen] = useState(false);
 
+  const activeLink = 'text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white rounded-md bg-light-white'
+  const normalLink = 'text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white rounded-md'
+
   const Menus = [
-    { title: "Dashboard", to: "/admin-protected" }, // Add the 'to' prop for links
-    { title: "Department", icon: <AiOutlineFileText />, to: "/admin/department" }, // Add 'to' prop for links
-    { title: "Course", spacing: true, icon: <BsFillImageFill />, to: "/admin/course" },
+    { title: "Dashboard", to: "/admin-protected" }, // Add the 'to' prop for NavLinks
+    { title: "Departments", icon: <AiOutlineFileText />, to: "/admin/department" }, // Add 'to' prop for NavLinks
+    { title: "Courses", icon: <BsFillImageFill />, to: "/admin/course" },
     {
       title: "Projects",
       icon: <BsReverseLayoutTextSidebarReverse />,
@@ -65,6 +68,7 @@ function Sidebar() {
     };
   }, []);
 
+
   return (
     <>
       <div
@@ -84,6 +88,9 @@ function Sidebar() {
             }`}
           />
           <h1
+            style={{
+              transitionDelay: '2ms',
+            }}
             className={`text-white origin-left font-medium text-2xl duration-300 ${
               !open && "scale-0"
             }`}
@@ -96,12 +103,10 @@ function Sidebar() {
           {Menus.map((menu, index) => (
             <React.Fragment key={index}>
               {menu.to ? (
-                // If 'to' prop is defined, use Link component for navigation
-                <Link
+                // If 'to' prop is defined, use NavLink component for navigation
+                <NavLink
                   to={menu.to}
-                  className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white rounded-md ${
-                    menu.spacing ? "mt-9" : "mt-2"
-                  }`}
+                  className={({ isActive }) => isActive ? activeLink: normalLink}
                 >
                   <span
                     className={`text-2xl block float-left duration-500 ${
@@ -111,11 +116,18 @@ function Sidebar() {
                     {menu.icon ? menu.icon : <RiDashboardFill />}
                   </span>
                   <span
-                    className={`text-base font-medium flex-1 duration-200 ${
-                      !open && "hidden"
+                    // className={`text-base font-medium flex-1 duration-200 ${
+                    //   !open && "hidden"
+                    // }`}
+
+                    style={{
+                    transitionDelay: `${index + 3}00ms`,
+                    }}
+                    className={`text-lg font-medium flex-1 duration-200 ${
+                    !open && "opacity-0 translate-x-28 overflow-hidden"
                     }`}
                   >
-                    {menu.title}
+                    {menu?.title}
                   </span>
                   <span className="">
                     {menu.submenu && open && (
@@ -124,7 +136,7 @@ function Sidebar() {
                       />
                     )}
                   </span>
-                </Link>
+                </NavLink>
                               ) : (
                 // Otherwise, render a regular list item
                 <li
@@ -163,13 +175,13 @@ function Sidebar() {
                     key={index}
                     className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 hover:bg-light-white rounded-md"
                   >
-                    <Link to={submenuItem.to}>
+                    <NavLink to={submenuItem.to}>
                       <span
                           className="text-base font-medium"
                       >
                         {submenuItem?.title}
                       </span>
-                    </Link>
+                    </NavLink>
                   </li>
                 ))}               
               </ul>
