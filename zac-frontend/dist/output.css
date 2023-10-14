@@ -534,6 +534,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+<<<<<<< HEAD
+.contentClass{
+  font-family: 'Dela Gothic One', cursive;
+=======
 .fixed {
   position: fixed;
 }
@@ -1139,4 +1143,5 @@ video {
   .md\:pl-0 {
     padding-left: 0px;
   }
+>>>>>>> ae0307e5aeb1c5988b860e774f75e7d9f99c8186
 }
