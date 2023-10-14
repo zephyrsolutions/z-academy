@@ -497,11 +497,12 @@ module.exports = {
 
             const teacher = await Teacher.find({ department: req.params.id })
             const course = await Course.find({ department: req.params.id })
-                res.render('admin/departmentMain',{
-                    department,
-                    course,
-                    teacher,
-                })
+                // res.render('admin/departmentMain',{
+                //     department,
+                //     course,
+                //     teacher,
+                // })
+                res.json(course)
         }catch(err){
             console.error(err)
             res.render('error/500')

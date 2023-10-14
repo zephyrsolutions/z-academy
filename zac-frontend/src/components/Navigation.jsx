@@ -52,7 +52,7 @@ const Navigation = () => {
             <li className="md:ml-8 md:my-0 my-7 font-semibold">
                 <a href="/logout" className="text-gray-800 hover:text-blue-400 duration-500">
                     <span className="md:hidden">LOGOUT</span>       
-                    <span className="hidden md:inline"><FiLogOut /></span>             
+                    <span className="hidden md:inline"><FiLogOut className="h-6 w-6" /></span>             
                 </a>
             </li>
 

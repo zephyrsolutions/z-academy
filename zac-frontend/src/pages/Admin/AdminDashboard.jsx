@@ -11,10 +11,8 @@ const AdminDashboard = () => {
   return (
     <>
       <div className="flex">   
-        <Navigation /> 
-        <Sidebar />
-        <ContentArea />  
-        <FloatingSidebar />
+        <Sidebar />      
+        <ContentArea />
       </div>
     </>    
   )
